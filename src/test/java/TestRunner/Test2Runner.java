@@ -6,7 +6,7 @@ import org.junit.runner.RunWith;
 
 @RunWith(CucumberWithSerenity.class)
 @CucumberOptions(
-        features = {"src/test/resources/Features/Project Manager/ProjectCreation/PurposePitch.feature"},
+        features = {"src/test/resources/Features/Developer"},
         tags = {""},
         glue = {"Steps"},
         plugin = {"pretty", "html:target/cucumber-reports"},

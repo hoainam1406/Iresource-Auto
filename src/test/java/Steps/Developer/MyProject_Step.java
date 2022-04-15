@@ -1,4 +1,4 @@
-package Steps.InternalPersona;
+package Steps.Developer;
 
 public class MyProject_Step {
 }

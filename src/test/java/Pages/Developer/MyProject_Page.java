@@ -1,4 +1,4 @@
-package Pages.InternalPersona;
+package Pages.Developer;
 
 public class MyProject_Page {
 }
