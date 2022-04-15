@@ -101,7 +101,16 @@ Feature: Sign Up Test cases
       |message                |
       |Invalid email format   |
 
-
+  @SignUp @SignUpFunctionality @Email @IR35 @Dev
+  Scenario Outline:IR-33: Verify that the error message is shown when entering the email without @
+    Given I want to open sign up page
+    When I want to enter an example email
+    And I click Sign Up button
+    And I want to enter email without @
+    Then The error message "<message>" should be shown below field
+    Examples:
+      |message                |
+      |Invalid email format   |
 
 
 
