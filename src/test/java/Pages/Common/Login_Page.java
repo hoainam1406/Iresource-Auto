@@ -26,4 +26,9 @@ public class Login_Page extends PageObject {
     public void enterPassword(String password){
         method.enterData(login_ui.tbxPassword,password);
     }
+
+    public void enterAllFields(String email, String password){
+        method.enterData(login_ui.tbxEmail,email);
+        method.enterData(login_ui.tbxPassword,password);
+    }
 }
