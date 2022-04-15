@@ -1,4 +1,4 @@
-package Steps.ProjectCreator;
+package Steps.ProjectManager;
 
 public class ManageProject_Step {
 }

@@ -1,4 +1,4 @@
-package Pages.ProjectCreator;
+package Pages.ProjectManager;
 
 public class ManageProject_Page {
 }
