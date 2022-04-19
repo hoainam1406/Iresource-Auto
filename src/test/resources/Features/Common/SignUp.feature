@@ -1,8 +1,8 @@
 Feature: Sign Up Test cases
   I want to Sign Up an account on IResource website
 
-  @SignUp @SignUpFunctionality @IR29 @Dev
-  Scenario: IR-29: Verify that user is able to sign up when filling all the mandatory fields
+  @SignUp @SignUpFunctionality @SignUpButton @IR29 @IR293 @Dev
+  Scenario: IR-29, IR-293: Verify that user is able to sign up when filling all the mandatory fields
     Given I want to open sign up page
     When I want to enter all fields
     And I click Sign Up button
@@ -94,142 +94,184 @@ Feature: Sign Up Test cases
   Scenario Outline:IR-34: Verify that the error message is shown when entering already registered email id
     Given I want to open sign up page
     When I want to enter an example email
-    And I click Sign Up button
     When I want to enter email contains blank space
     Then The error message "<message>" should be shown below field
     Examples:
       |message                |
       |Invalid email format   |
 
-  @SignUp @SignUpFunctionality @Email @IR35 @Dev
+  @SignUp @SignUpFunctionality @Email @IR33 @Dev
   Scenario Outline:IR-33: Verify that the error message is shown when entering the email without @
     Given I want to open sign up page
     When I want to enter an example email
-    And I click Sign Up button
-    And I want to enter email without @
+    And I want to enter email without @ sign
     Then The error message "<message>" should be shown below field
     Examples:
       |message                |
       |Invalid email format   |
 
-
-
-
-
-
-
-
-
-
-
-
-
-  @SignUp
-  Scenario Outline:Verify user is able to sign up successfully when entering all valid fields
+  @SignUp @SignUpFunctionality @Email @IR154 @Dev
+  Scenario: IR-154: Verify that user can sign up successfully with the correct email contains multiple dots
     Given I want to open sign up page
-    When I want to enter all fields "<FirstName>" "<LastName>" "<Email>" "<Password>" "<ConfirmPassword>"
+    When I want to enter a correct email with contains multiple dots
     And I click Sign Up button
     Then The error message should be shown
-    Examples:
-      |FirstName|LastName|Email                           |Password    |ConfirmPassword|
-      | Nam     | Hoai   |hoainam.nv.1406+test19@gmail.com|Hoainam1406@|Hoainam1406@   |
 
-#  Name fields
-  @SignUp
-  Scenario Outline:Verify user the error message will show when entering invalid Firstname and Lastname
+  @SignUp @SignUpFunctionality @Email @IR153 @Dev
+  Scenario Outline: IR-153: Verify that the error message is shown when entering email contains two @ sign
     Given I want to open sign up page
-    When I want to enter all fields "<FirstName>" "<LastName>" "<Email>" "<Password>" "<ConfirmPassword>"
-    And I click Sign Up button
-    Then The error messages should show "<Message>"
+    When I want to enter an example email
+    And I want to enter an email contains two @ sign
+    Then The error message "<message>" should be shown below field
     Examples:
-      |FirstName |LastName |Email         |Password    |ConfirmPassword|Message                |
-      | Nam123   | Hoai    |hoainam@namhoai|Hoainam1406@|Hoainam1406@   |Please enter valid name|
-      | Nam      | Hoai*   |hoainam@namhoai|Hoainam1406@|Hoainam1406@   |Please enter valid name|
+      |message                |
+      |Invalid email format   |
 
-  @SignUp
-  Scenario Outline:Verify user the error message will show when leaving the Firstname and Lastname fields blank
+  @SignUp @SignUpFunctionality @Email @IR277 @Dev
+  Scenario Outline: IR-277: Verify that the error message is shown when only entering space characters in Email field
     Given I want to open sign up page
-    When I want to enter all fields "<FirstName>" "<LastName>" "<Email>" "<Password>" "<ConfirmPassword>"
-    And I click Sign Up button
-    Then The error messages should show "<Message>"
+    When I want to enter an example email
+    And I want to enter space charactes in Email field
+    Then The error message "<message>" should be shown below field
     Examples:
-      |FirstName |LastName |Email          |Password    |ConfirmPassword|Message   |
-      |  Nam     |         |hoainam@namhoai|Hoainam1406@|Hoainam1406@   |Required! |
-      |          |Hoai     |hoainam@namhoai|Hoainam1406@|Hoainam1406@   |Required! |
+      |message       |
+      |Required!     |
 
-#   Email field
-  @SignUp
-  Scenario Outline:Verify user the error message will show when leaving the Email field blank
+  @SignUp @SignUpFunctionality @Email @IR277 @Dev
+  Scenario Outline: IR-278: Verify that the error message is shown when leaving Email field blank
     Given I want to open sign up page
-    When I want to enter all fields "<FirstName>" "<LastName>" "<Email>" "<Password>" "<ConfirmPassword>"
+    When I want to leave the email field blank
     And I click Sign Up button
-    Then The error messages should show "<Message>"
+    Then The error message "<message>" should be shown below field
     Examples:
-      |FirstName |LastName |Email          |Password    |ConfirmPassword|Message   |
-      |    ABC   |   DEF   |               |Hoainam1406@|Hoainam1406@   |Required! |
+      |message       |
+      |Required!     |
 
-  @SignUp
-  Scenario Outline:Verify user the error message will show when entering invalid email
+  @SignUp @SignUpFunctionality @Password @IR37 @Dev
+  Scenario Outline: IR-37: Verify that the data in the password field is shown when clicking 'eye icon'
     Given I want to open sign up page
-    When I want to enter all fields "<FirstName>" "<LastName>" "<Email>" "<Password>" "<ConfirmPassword>"
-    And I click Sign Up button
-    Then The error messages should show "<Message>"
+    When I want to enter password data "<data>"
+    And I click 'Eye' icon to show password
+    Then The data of the password field should be showed
     Examples:
-      |FirstName |LastName |Email          |Password    |ConfirmPassword|Message             |
-      |    ABC   |   DEF   |hoainam@namhoai|Hoainam1406@|Hoainam1406@   |Invalid email format|
+    |data        |
+    |password    |
 
-#   Password field
-  @SignUp
-  Scenario Outline:Verify user the error message will show when leaving the password field blank
+  @SignUp @SignUpFunctionality @Password @IR36 @Dev
+  Scenario Outline: IR-36: Verify that the data in password field is either visible as asterisk or bullet signs
     Given I want to open sign up page
-    When I want to enter all fields "<FirstName>" "<LastName>" "<Email>" "<Password>" "<ConfirmPassword>"
-    And I click Sign Up button
-    Then The error messages should show "<Message>"
+    When I want to enter password data "<data>"
+    Then The data in password field is either visible as asterisk or bullet signs by default
     Examples:
-      |FirstName |LastName |Email            |Password    |ConfirmPassword|Message             |
-      |    ABC   |   DEF   |hoainam@gmail.com|            |Hoainam1406@   |Required!           |
+      |data        |
+      |password    |
 
-  @SignUp
-  Scenario Outline:Verify user the error message will show when entering invalid Password
+  @SignUp @SignUpFunctionality @Password @IR279 @Dev
+  Scenario Outline: IR-279: Verify that user is unable to sign up when entering password less than 5 characters
     Given I want to open sign up page
-    When I want to enter all fields "<FirstName>" "<LastName>" "<Email>" "<Password>" "<ConfirmPassword>"
+    When I want to enter password data "<data>"
     And I click Sign Up button
-    Then The error messages should show "<Message>"
+    Then The error message "<message>" should be shown below "<field>" field "<index>"
     Examples:
-      |FirstName |LastName |Email            |Password  |ConfirmPassword        |Message                                                          |
-      |    ABC   |   DEF   |hoainam@gmail.com|Hoai1     |Hoainam1406@           |At least one uppercase, one number and one special case character|
-      |    ABC   |   DEF   |hoainam@gmail.com|Hoainam   |Hoainam1406@           |At least one uppercase, one number and one special case character|
-      |    ABC   |   DEF   |hoainam@gmail.com|Hoainam@  |Hoainam1406@           |At least one uppercase, one number and one special case character|
-      |    ABC   |   DEF   |hoainam@gmail.com|Hoainam@  |hoainam1406@           |At least one uppercase, one number and one special case character|
+      |data        |message             |field   |index|
+      |Pa1@        |Minimum 5 characters|Password|3    |
 
-  @SignUp
-  Scenario Outline:Verify user the error message will show when entering password contains blank space
+  @SignUp @SignUpFunctionality @Password @IR281 @Dev
+  Scenario Outline: IR-281: Verify that user is unable to sign up when leaving Password field blank
     Given I want to open sign up page
-    When I want to enter all fields "<FirstName>" "<LastName>" "<Email>" "<Password>" "<ConfirmPassword>"
+    When I want to enter all fields except password field
     And I click Sign Up button
-    Then The error messages should show "<Message>"
+    Then The error message "<message>" should be shown below "<field>" field "<index>"
     Examples:
-      |FirstName |LastName |Email            |Password    |ConfirmPassword      |Message                                  |
-      |    ABC   |   DEF   |hoainam@gmail.com|Hoa 1406@   |Hoainam1406@         |This field cannot contain blankspaces    |
+      |message       |field   |index|
+      |Required!     |Password|0    |
 
-#   Confirm password field
-  @SignUp
-  Scenario Outline:Verify user the error message will show when leaving the Confirmpassword field blank
+  @SignUp @SignUpFunctionality @Password @IR284 @Dev
+  Scenario Outline: IR-284: Verify that user the error message will show when entering password missing 1 of 3 characters uppercase, number, special
     Given I want to open sign up page
-    When I want to enter all fields "<FirstName>" "<LastName>" "<Email>" "<Password>" "<ConfirmPassword>"
+    When I want to enter password missing 1 of 3 characters uppercase, number, special "<data>"
     And I click Sign Up button
-    Then The error messages should show "<Message>"
+    Then The error message "<message>" should be shown below "<field>" field "<index>"
     Examples:
-      |FirstName |LastName |Email            |Password    |ConfirmPassword      |Message       |
-      |    ABC   |   DEF   |hoainam@gmail.com|Hoainam1406@|                     |Required!     |
+      |data         |message                                                          |field    |index |
+      |Password123  |At least one uppercase, one number and one special case character|Password | 3    |
+      |password123@ |At least one uppercase, one number and one special case character|Password | 3    |
+      |Password@    |At least one uppercase, one number and one special case character|Password | 3    |
 
-  @SignUp
-  Scenario Outline:Verify user the error message will show when entering Confirmpassword not match with password
+
+  @SignUp @SignUpFunctionality @ConfirmPassword @IR457 @Dev
+  Scenario Outline: IR-457: Verify user is able to sign up when entering the confirm password field with the same password
     Given I want to open sign up page
-    When I want to enter all fields "<FirstName>" "<LastName>" "<Email>" "<Password>" "<ConfirmPassword>"
+    When I want to enter password "<password>" and confirm password "<confirmpassword>"
     And I click Sign Up button
-    Then The error messages should show "<Message>"
+#    Then No error message is shown below the Confirm password
     Examples:
-      |FirstName |LastName |Email            |Password    |ConfirmPassword      |Message                |
-      |    ABC   |   DEF   |hoainam@gmail.com|Hoainam1406@|Hoainam1406          |Password doesn’t match |
+      |password      |confirmpassword  |
+      |Validpass123@ |Validpass123@    |
+
+  @SignUp @SignUpFunctionality @ConfirmPassword @IR458 @Dev
+  Scenario Outline: IR-458:  Verify user is able to sign up when entering the confirm password field with the different password
+    Given I want to open sign up page
+    When I want to enter password "<password>" and confirm password "<confirmpassword>"
+    And I click Sign Up button
+    Then The error message "<message>" should be shown below "<field>" field "<index>"
+    Examples:
+      |password      |confirmpassword  |message               |field               |index|
+      |Validpass123@ |Validpass123     |Password doesn’t match|Confirm Password    | 3   |
+
+  @SignUp @SignUpFunctionality @ConfirmPassword @IR459 @Dev
+  Scenario Outline: IR-459: Verify that the data in the Confirm password field is shown when clicking 'eye icon'
+    Given I want to open sign up page
+    When I want to enter confirm password "<confirmpassword>"
+    And I click 'Eye' icon of confirm password field
+    Then The data of the confirm password field should be showed
+    Examples:
+      |confirmpassword  |
+      |Validpass123@    |
+
+  @SignUp @SignUpFunctionality @ConfirmPassword @IR460 @Dev
+  Scenario Outline: IR-460: Verify that the data in the Confirm password field is either visible as asterisk or bullet signs
+    Given I want to open sign up page
+    When I want to enter confirm password "<confirmpassword>"
+    Then The data in password field is either visible as asterisk or bullet signs by default
+    Examples:
+      |confirmpassword  |
+      |Validpass123@    |
+
+  @SignUp @SignUpFunctionality @LoginHereHyperLink @IR40 @Dev
+  Scenario Outline: IR-40: Verify that the system is able to navigate when clicking 'Log in Here' button
+    Given I want to open sign up page
+    When I click 'Log In Here' hyperlink
+    Then The user should be navigate to page "<page>" with url "<url>"
+    Examples:
+      |page  |url                                |
+      |Login |https://iresource.smartdev.vn/login|
+
+  @SignUp @SignUpFunctionality @SignUp @IR293 @Dev
+  Scenario Outline: IR-293: Verify that user navigates to Verify email page when click on 'Sign up' button
+    Given I want to open sign up page
+    When I click 'Log In Here' hyperlink
+    Then The user should be navigate to page "<page>" with url "<url>"
+    Examples:
+      |page  |url                                |
+      |Login |https://iresource.smartdev.vn/login|
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

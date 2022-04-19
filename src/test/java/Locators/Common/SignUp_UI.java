@@ -41,11 +41,8 @@ public class SignUp_UI extends PageObject {
     @FindBy(className = "font-weight-bold")
     public WebElementFacade btnLogInHere;
 
-    @FindBy(className = "fa fa-eye-slash")
-    public WebElementFacade btnShowPassword;
-
-    @FindBy(className = "input-group-text")
-    public WebElementFacade btnShowConfirmPassword;
+    @FindBy(className = "input-group-append")
+    public List <WebElementFacade> btnShowPassword;
 
     @FindBy(xpath = "//body/div[@id='root']/div[1]/div[1]/div[1]/div[2]/div[2]/form[1]/div[1]/div[3]/p[1]")
     public WebElementFacade errMessageEmail;
