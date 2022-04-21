@@ -39,7 +39,7 @@ public class SignUp_UI extends PageObject {
     public WebElementFacade btnSignUpButton;
 
     @FindBy(className = "font-weight-bold")
-    public WebElementFacade btnLogInHere;
+    public List <WebElementFacade> btnLogInHere;
 
     @FindBy(className = "input-group-append")
     public List <WebElementFacade> btnShowPassword;

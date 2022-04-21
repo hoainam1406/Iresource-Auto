@@ -162,6 +162,12 @@ public class SignUp_Step extends PageObject {
         method.compareEqual(message,method.getText(signUp_ui.errors.get(2)));
     }
 
+    @When("^I want to enter an email contains consecutive dots$")
+    public void iWantToEnterAnEmailContainsConsecutiveDots() throws Exception {
+        setExcel();
+        signUp_page.enterEmailField(excel.getCellData(13,3));
+    }
+
     @And("^I want to enter email without @ sign$")
     public void iWantToEnterEmailWithoutSign() throws Exception {
         setExcel();
@@ -218,11 +224,11 @@ public class SignUp_Step extends PageObject {
     public void iWantToEnterAllFieldsExceptPasswordField() throws Exception {
         setExcel();
         signUp_page.enterAllFields(
-                excel.getCellData(16, 1),
-                excel.getCellData(16, 2),
-                excel.getCellData(16, 3),
-                excel.getCellData(16, 4),
-                excel.getCellData(16, 5));
+                excel.getCellData(17, 1),
+                excel.getCellData(17, 2),
+                excel.getCellData(17, 3),
+                excel.getCellData(17, 4),
+                excel.getCellData(17, 5));
     }
 
     @Then("^The error message \"([^\"]*)\" should be shown below \"([^\"]*)\" field \"([^\"]*)\"$")
@@ -268,7 +274,7 @@ public class SignUp_Step extends PageObject {
 
     @When("^I click 'Log In Here' hyperlink$")
     public void iClickLogInHereHyperlink() throws InterruptedException {
-        element(By.xpath("//a[contains(text(),'Log In Here')]")).click();
+        method.click(signUp_ui.btnLogInHere.get(1));
     }
 
     @Then("^The user should be navigate to page \"([^\"]*)\" with url \"([^\"]*)\"$")
@@ -276,5 +282,21 @@ public class SignUp_Step extends PageObject {
         Thread.sleep(5000);
         method.compareEqual(url,method.getUrl());
     }
+
+    @When("^I enter all data \"([^\"]*)\" into all fields$")
+    public void iEnterAllDataIntoAllFields(String data) throws Throwable {
+        signUp_page.enterAllFields(data,data,data,data,data);
+    }
+
+    @And("^I press backspace or delete keys in password and email fields$")
+    public void iPressBackspaceOrDeleteKeysInPasswordAndEmailFields() throws InterruptedException {
+        signUp_page.pressDeleteOrBackspace();
+    }
+
+    @Then("^The data should be removed normally \"([^\"]*)\"$")
+    public void theDataShouldBeRemovedNormally(String newdata) throws Throwable {
+        signUp_page.compareData (newdata);
+    }
+
 
 }

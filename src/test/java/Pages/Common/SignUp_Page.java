@@ -4,6 +4,7 @@ import ExtensionPage.CommonMethod;
 import Locators.Common.SignUp_UI;
 import net.serenitybdd.core.pages.PageObject;
 import net.thucydides.core.annotations.DefaultUrl;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
 
 import javax.swing.*;
@@ -34,11 +35,23 @@ public class SignUp_Page extends PageObject {
         method.enterData(signUp_ui.tbxEmail,email);
     }
 
-    public void enterPasswordField(String password){
-        method.enterData(signUp_ui.tbxPassword,password);
+    public void pressDeleteOrBackspace(){
+        method.enterData(signUp_ui.tbxFirstName, Keys.chord(Keys.BACK_SPACE));
+        method.enterData(signUp_ui.tbxLastName, Keys.chord(Keys.BACK_SPACE));
+        method.enterData(signUp_ui.tbxEmail, Keys.chord(Keys.BACK_SPACE));
+        method.enterData(signUp_ui.tbxPassword, Keys.chord(Keys.BACK_SPACE));
+        method.enterData(signUp_ui.tbxConfirmPassword, Keys.chord(Keys.BACK_SPACE));
     }
 
-    public void enterConfirmPasswordField(String confirmpassword){
-        method.enterData(signUp_ui.tbxPassword,confirmpassword);
+    public void compareData(String data){
+        method.compareEqual(data,method.getAttribute(signUp_ui.tbxFirstName,"value"));
+        method.compareEqual(data,method.getAttribute(signUp_ui.tbxLastName,"value"));
+        method.compareEqual(data,method.getAttribute(signUp_ui.tbxEmail,"value"));
+        method.compareEqual(data,method.getAttribute(signUp_ui.tbxPassword,"value"));
+        method.compareEqual(data,method.getAttribute(signUp_ui.tbxConfirmPassword,"value"));
+
+
     }
+
+
 }

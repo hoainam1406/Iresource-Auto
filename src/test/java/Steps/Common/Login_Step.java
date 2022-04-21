@@ -249,22 +249,6 @@ public class Login_Step extends PageObject {
         method.click(login_ui.btnSignUpHere);
     }
 
-//    @Then("^I want to edit my capabities$")
-//    public void iWantToEditMyCapabities() throws InterruptedException {
-////        JavascriptExecutor js = (JavascriptExecutor) getDriver();
-////        element(By.className("my-profile")).click();
-////        js.executeScript("javascript:window.scrollBy(1100,1150)");
-////        login_ui.btnTop.get(1).click();
-//        element(By.className("my-profile")).click();
-//        evaluateJavascript("document.querySelector('div.content-wrapper div.main-layout div.d-flex div.main-layout-body div.myProfile div.myProfile__capabilities:nth-child(4) div.ctn-capability div.capability div.inside > div.button_bottom').click()");
-//        login_ui.txbSearch.sendKeys("a");
-//        login_ui.txbSearch.sendKeys(Keys.chord(Keys.SPACE,Keys.SPACE,"a",Keys.SPACE,Keys.SPACE));
-//        login_ui.txbSearch.sendKeys("a");
-//        Thread.sleep(12000);
-////        Assert.assertTrue(element(By.xpath("//body/div[3]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]")).isDisplayed());
-//
-//    }
-
     @And("^I use the enter key$")
     public void iUseTheEnterKey() {
         method.enterData(login_ui.btnLogin,Keys.chord(Keys.ENTER));
