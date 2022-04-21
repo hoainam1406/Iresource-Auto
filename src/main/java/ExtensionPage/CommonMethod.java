@@ -75,6 +75,7 @@ public class CommonMethod extends PageObject {
         ((JavascriptExecutor) getDriver()).executeScript(
                 "arguments[0].scrollIntoView();", element);
     }
+
     public void scrollUp(){
         ((JavascriptExecutor)
                 getDriver()).executeScript("window.scrollTo(0, document.body.scrollTop);");
