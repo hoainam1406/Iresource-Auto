@@ -13,20 +13,18 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import net.serenitybdd.core.pages.PageObject;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 
+import java.awt.*;
+import java.awt.event.KeyEvent;
+
 public class Login_Step extends PageObject {
+
     Login_UI login_ui;
     Login_Page login_Page;
     NavigationBar navigationBar;
-    ResetPassword_UI resetPassword_ui;
     CommonMethod method;
-
-    public ExcelHelpers excel = new ExcelHelpers();
-
-    public void setExcel() throws Exception {
-        excel.setExcelFile("src/test/resources/data/TestData.xlsx","LoginData");
-    }
 
     @Given("^I want to open login page$")
     public void iWantToOpenLoginPage() {
@@ -34,20 +32,13 @@ public class Login_Step extends PageObject {
     }
 
     @When("^I enter valid Email and Password less than (\\d+) characters$")
-    public void iEnterValidEmailAndPasswordLessThanCharacters(int arg) throws Exception {
-        setExcel();
-        login_Page.enterEmailPasswordField(
-                excel.getCellData(12,1),
-                excel.getCellData(12,2)
-        );
+    public void iEnterValidEmailAndPasswordLessThanCharacters(int four) throws Exception {
+       login_Page.enterDataFromDataset(12);
     }
 
     @And("^I want to enter valid email and password \\(initial login\\)$")
     public void iWantToEnterValidEmailAndPasswordInitialLogin() throws Exception {
-        setExcel();
-        login_Page.enterEmailPasswordField(
-                excel.getCellData(1,1),
-                excel.getCellData(1,2));
+        login_Page.enterDataFromDataset(1);
     }
 
     @And("^I click Login button$")
@@ -62,19 +53,12 @@ public class Login_Step extends PageObject {
 
     @And("^I want to enter valid email and password \\(subsequent login\\)$")
     public void iWantToEnterValidEmailAndPasswordSubsequentLogin() throws Exception {
-        setExcel();
-        login_Page.enterEmailPasswordField(
-                excel.getCellData(2,1),
-                excel.getCellData(2,2));
+        login_Page.enterDataFromDataset(2);
     }
 
     @When("^I enter valid Email and invalid Password$")
     public void iEnterValidEmailAndInvalidPassword() throws Exception {
-        setExcel();
-        login_Page.enterEmailPasswordField(
-                excel.getCellData(13,1),
-                excel.getCellData(13,2)
-        );
+        login_Page.enterDataFromDataset(13);
     }
 
     @Then("^The error message \"([^\"]*)\" should be shown$")
@@ -84,16 +68,12 @@ public class Login_Step extends PageObject {
 
     @When("^I enter valid Email$")
     public void iEnterValidEmail() throws Exception {
-        setExcel();
-        login_Page.enterEmail(
-                excel.getCellData(14,1)
-        );
+        login_Page.enterDataFromDataset(14);
     }
 
     @When("^I only enter Password field$")
     public void iOnlyEnterPasswordField() throws Exception {
-        setExcel();
-        login_Page.enterPassword(excel.getCellData(16,2));
+        login_Page.enterDataFromDataset(16);
     }
 
     @Then("^The data in password field should be visible as asterisk orr bullet signs$")
@@ -113,14 +93,15 @@ public class Login_Step extends PageObject {
 
     @When("^I want to enter data \"([^\"]*)\" into fields$")
     public void iWantToEnterDataIntoFields(String data) throws Throwable {
-        method.enterData(login_ui.tbxEmail,data);
-        method.enterData(login_ui.tbxPassword,data);
+        login_Page.enterEmailPasswordField(data,data);
     }
 
     @And("^I want to remove data by using backspace or delete keys$")
-    public void iWantToRemoveDataByUsingBackspaceOrDeleteKeys() {
+    public void iWantToRemoveDataByUsingBackspaceOrDeleteKeys() throws AWTException {
         method.enterData(login_ui.tbxEmail,Keys.chord(Keys.BACK_SPACE));
+//        method.pressBackspaceKeyUsingRobot();
         method.enterData(login_ui.tbxPassword,Keys.chord(Keys.BACK_SPACE));
+//        method.pressBackspaceKeyUsingRobot();
     }
 
     @Then("^The data should be removed \"([^\"]*)\"$")
@@ -131,19 +112,12 @@ public class Login_Step extends PageObject {
 
     @When("^I want to enter invalid data into fields$")
     public void iWantToEnterInvalidDataIntoFields() throws Exception {
-        setExcel();
-        login_Page.enterEmailPasswordField(
-                excel.getCellData(5,1),
-                excel.getCellData(5,2));
+        login_Page.enterDataFromDataset(5);
     }
 
     @When("^I enter valid Email and Password$")
     public void iEnterValidEmailAndPassword() throws Exception {
-        setExcel();
-        login_Page.enterEmailPasswordField(
-                excel.getCellData(18,1),
-                excel.getCellData(18,2)
-        );
+        login_Page.enterDataFromDataset(18);
     }
 
     @And("^I click on 'Remember Me' checkbox$")
@@ -158,15 +132,13 @@ public class Login_Step extends PageObject {
 
     @Then("^User should be redirected to Log in page and Username and Password should be saved$")
     public void userShouldBeRedirectedToLogInPageAndUsernameAndPasswordShouldBeSaved() throws Exception {
-        setExcel();
-        method.compareEqual(excel.getCellData(18,1),method.getAttribute(login_ui.tbxEmail,"value"));
-        method.compareEqual(excel.getCellData(18,2),method.getAttribute(login_ui.tbxPassword,"value"));
+        method.compareEqual(login_Page.getCellData(18,1),method.getAttribute(login_ui.tbxEmail,"value"));
+        method.compareEqual(login_Page.getCellData(18,2),method.getAttribute(login_ui.tbxPassword,"value"));
     }
 
     @And("^I enter Email field without domain$")
     public void iEnterEmailFieldWithoutDomain() throws Exception {
-        setExcel();
-        login_Page.enterEmail(excel.getCellData(6,1));
+        login_Page.enterDataFromDataset(6);
     }
     @Then("^The error message \"([^\"]*)\" should be shown below each field$")
     public void theErrorMessageShouldBeShownBelowEachField(String message) throws Throwable {
@@ -181,10 +153,7 @@ public class Login_Step extends PageObject {
 
     @And("^I want to enter email contains two @ sign and valid Password$")
     public void iWantToEnterEmailContainsTwoSignAndValidPassword() throws Exception {
-        setExcel();
-        login_Page.enterEmailPasswordField(
-                excel.getCellData(7,1),
-                excel.getCellData(7,2));
+        login_Page.enterDataFromDataset(7);
     }
 
     @Then("^The error message should show and user is stay in login page \"([^\"]*)\"$")
@@ -194,18 +163,13 @@ public class Login_Step extends PageObject {
 
     @And("^I want to enter email without @$")
     public void iWantToEnterEmailWithout() throws Exception {
-        setExcel();
-        login_Page.enterEmailPasswordField(
-                excel.getCellData(8,1),
-                excel.getCellData(8,2));
+        login_Page.enterDataFromDataset(8);
+
     }
 
     @And("^I leave the email field blank and enter valid password$")
     public void iLeaveTheEmailFieldBlankAndEnterValidPassword() throws Exception {
-        setExcel();
-        login_Page.enterEmailPasswordField(
-                excel.getCellData(9,1),
-                excel.getCellData(9,2));
+        login_Page.enterDataFromDataset(9);
     }
 
     @Then("^The user will be redirected to Profile creation page with url \"([^\"]*)\" if it is initial login$")
@@ -214,24 +178,18 @@ public class Login_Step extends PageObject {
     }
 
     @Then("^The user will be redirected to corresponding page \"([^\"]*)\" with url \"([^\"]*)\"$")
-    public void theUserWillBeRedirectedToCorrespondingPageWithUrl(String page, String url) throws Throwable {
+    public void theUserWillBeRedirectedToCorrespondingPageWithUrl(String page, String url){
         method.compareEqual(url,method.getUrl());
     }
 
     @And("^I want to enter the email contains multiple consecutive dots$")
     public void iWantToEnterTheEmailContainsMultipleConsecutiveDots() throws Exception {
-        setExcel();
-        login_Page.enterEmailPasswordField(
-                excel.getCellData(10,1),
-                excel.getCellData(10,2));
+        login_Page.enterDataFromDataset(10);
     }
 
     @And("^I want to enter an unregistered email$")
     public void iWantToEnterAnUnregisteredEmail() throws Exception {
-        setExcel();
-        login_Page.enterEmailPasswordField(
-                excel.getCellData(11,1),
-                excel.getCellData(11,2));
+        login_Page.enterDataFromDataset(11);
     }
 
     @When("^I click on ‘Forgot Password’ hyperlink$")
@@ -256,20 +214,13 @@ public class Login_Step extends PageObject {
 
     @And("^I want to enter valid email and password \\(PM role initial login\\)$")
     public void iWantToEnterValidEmailAndPasswordPMRoleInitialLogin() throws Exception {
-        setExcel();
-        login_Page.enterEmailPasswordField(
-                excel.getCellData(19,1),
-                excel.getCellData(19,2));
+        login_Page.enterDataFromDataset(19);
     }
 
     @And("^I want to enter valid email and password \\(PM role subsequent login\\)$")
     public void iWantToEnterValidEmailAndPasswordPMRoleSubsequentLogin() throws Exception {
-        setExcel();
-        login_Page.enterEmailPasswordField(
-                excel.getCellData(20,1),
-                excel.getCellData(20,2));
+        login_Page.enterDataFromDataset(20);
     }
-
 
 }
 

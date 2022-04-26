@@ -1,4 +1,4 @@
-package Locators.ProjectManager.ProjectCreation_UI;
+package Locators.ProjectManager.ProjectCreationUI;
 
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
