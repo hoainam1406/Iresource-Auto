@@ -39,6 +39,4 @@ public class Login_UI extends PageObject {
     @FindBy(xpath = "//div[contains(text(),'Email or password is invalid.')]")
     public WebElementFacade msgError;
 
-
-
 }

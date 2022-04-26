@@ -1,10 +1,10 @@
-package Pages.ProjectManager.ProjectCreation_Page;
+package Pages.ProjectManager.ProjectCreationPage;
 
 import ExtensionPage.CommonMethod;
 import ExtensionPage.ExcelHelpers;
 import Locators.Common.Login_UI;
 import Locators.ProjectManager.ManageProject_UI;
-import Locators.ProjectManager.ProjectCreation_UI.PurposePitch_UI;
+import Locators.ProjectManager.ProjectCreationUI.PurposePitch_UI;
 import Pages.Common.Login_Page;
 import net.serenitybdd.core.pages.PageObject;
 import net.thucydides.core.annotations.DefaultUrl;

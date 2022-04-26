@@ -9,13 +9,13 @@ import java.util.List;
 public class SignUp_UI extends PageObject {
 
     @FindBy(className = "errors")
-    public List<WebElementFacade> errors;
+    public List<WebElementFacade> errErrors;
 
     @FindBy(xpath = "//input[@id='card1']")
     public WebElementFacade boxInternalPersona;
 
-    @FindBy(css = "#card2")
-    public WebElementFacade boxProjectCreator;
+    @FindBy(css = "label[for='card2']")
+    public WebElementFacade cbxProjectCreator;
 
     @FindBy(xpath = "//div[contains(text(),'Firebase: Error (auth/email-already-in-use).')]")
     public WebElementFacade errFirebase;

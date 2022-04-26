@@ -1,9 +1,9 @@
 package Steps.ProjectManager.ProjectCreation_Step;
 
 import ExtensionPage.CommonMethod;
-import Locators.ProjectManager.ProjectCreation_UI.PurposePitch_UI;
+import Locators.ProjectManager.ProjectCreationUI.PurposePitch_UI;
 import Locators.ProjectManager.ProjectHealth_UI;
-import Pages.ProjectManager.ProjectCreation_Page.PurposePitch_Page;
+import Pages.ProjectManager.ProjectCreationPage.PurposePitch_Page;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
